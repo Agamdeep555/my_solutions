@@ -1,25 +1,36 @@
 # Intuition
 
 **Platform:** LeetCode  
-**Date:** 2026-05-27  
+**Date:** 2026-05-29  
 
 ## Solution
 
 ```
 class Solution {
 public:
-    int hIndex(vector<int>& citations) {
-        sort(citations.rbegin(),citations.rend());
-        int h=0;
-        for(int i=0;i<citations.size();i++){
-            if(citations[i]>=i+1){
-                h++;
+    string longestCommonPrefix(vector<string>& strs) {
+        string s = strs[0];
+
+        int kmin = INT_MAX;
+
+
+        for(int i=1;i<strs.size();i++){
+            string c = strs[i];
+            int k =0;
+
+            while(k<s.size() && k<c.size() && s[k]==c[k]){
+                k++;
             }
-            else{
-                break;
-            }
+            
+            kmin = min(kmin,k);
         }
-        return h;
+        string ans="";
+         for(int i = 0; i < kmin; i++) {
+            ans += s[i];
+        }
+
+        return ans;
+        
     }
 };
 ```
