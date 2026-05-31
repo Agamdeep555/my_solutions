@@ -1,36 +1,47 @@
 # Intuition
 
 **Platform:** LeetCode  
-**Date:** 2026-05-29  
+**Date:** 2026-05-31  
 
 ## Solution
 
 ```
 class Solution {
 public:
-    string longestCommonPrefix(vector<string>& strs) {
-        string s = strs[0];
+    string convert(string s, int numRows) {
+        if(numRows == 1) return s;
 
-        int kmin = s.size();
+        vector<string> rows(numRows);
+        int num = numRows;
+        int j = 0;
+        bool forward = true;
 
+        for(int i=0;i<s.size();i++){
 
-        for(int i=1;i<strs.size();i++){
-            string c = strs[i];
-            int k =0;
-
-            while(k<s.size() && k<c.size() && s[k]==c[k]){
-                k++;
+            if(j>=0 && j<num && forward == true){
+                rows[j] += s[i];
+                j++;
+                if(j==num){
+                    forward = false;
+                    j=j-2;
+                }
             }
-            
-            kmin = min(kmin,k);
+            else if(j<num && forward == false){
+                //if(j==num) j=j-2;
+                rows[j] += s[i];
+                j--;
+                if(j<0){
+                    forward = true;
+                    j=j+2;
+                }
+            }
         }
-        string ans="";
-         for(int i = 0; i < kmin; i++) {
-            ans += s[i];
+        string ans;
+        for(int i=0;i<num;i++){
+            ans += rows[i];
         }
 
         return ans;
-        
     }
 };
 ```
