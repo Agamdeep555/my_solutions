@@ -1,47 +1,27 @@
 # Intuition
 
 **Platform:** LeetCode  
-**Date:** 2026-05-31  
+**Date:** 2026-06-01  
 
 ## Solution
 
 ```
 class Solution {
 public:
-    string convert(string s, int numRows) {
-        if(numRows == 1) return s;
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int mini = INT_MAX;
+        int left = 0;
+        int sum = 0;
+        for(int i=0;i<nums.size();i++){
+            sum = sum + nums[i];
 
-        vector<string> rows(numRows);
-        int num = numRows;
-        int j = 0;
-        bool forward = true;
-
-        for(int i=0;i<s.size();i++){
-
-            if(j>=0 && j<num && forward == true){
-                rows[j] += s[i];
-                j++;
-                if(j==num){
-                    forward = false;
-                    j=j-2;
-                }
-            }
-            else if(j<num && forward == false){
-                //if(j==num) j=j-2;
-                rows[j] += s[i];
-                j--;
-                if(j<0){
-                    forward = true;
-                    j=j+2;
-                }
+            while(sum>=target){
+                mini = min(mini,i-left+1);
+                sum -= nums[left];
+                left++;
             }
         }
-        string ans;
-        for(int i=0;i<num;i++){
-            ans += rows[i];
-        }
-
-        return ans;
+        return mini == INT_MAX ? 0 : mini;
     }
 };
 ```
