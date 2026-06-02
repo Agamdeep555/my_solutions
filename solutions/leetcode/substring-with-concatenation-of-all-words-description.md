@@ -9,32 +9,55 @@
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
-        int wlen = words[1].size();
 
-        unordered_map<string,int> mpp;
+        unordered_map<string,int> need;
+        for(auto &w : words) need[w]++;
 
-        for(int i=0;i<words.size();i++){
-            mpp[words[i]]++;
-        }
-        int cnt=1;
-        string str;
-        for(int r = 0;r<s.size();r++){
+        int wlen = words[0].size();
+        int n = words.size();
 
-            str += s[r];
-            cnt = str.size();
-            if(cnt==wlen){
-                if(mpp.find(str) != mpp.end()){
-                    mpp[str]++;
+        vector<int> ans;
+
+        for(int start = 0; start < wlen; start++) {
+
+            unordered_map<string,int> window;
+            int left = start;
+            int count = 0;
+
+            for(int right = start; right + wlen <= s.size(); right += wlen) {
+
+                string word = s.substr(right, wlen);
+
+                if(need.count(word)) {
+
+                    window[word]++;
+                    count++;
+
+                    while(window[word] > need[word]) {
+                        string leftWord = s.substr(left, wlen);
+                        window[leftWord]--;
+                        left += wlen;
+                        count--;
+                    }
+
+                    if(count == n) {
+                        ans.push_back(left);
+
+                        string leftWord = s.substr(left, wlen);
+                        window[leftWord]--;
+                        left += wlen;
+                        count--;
+                    }
                 }
-                str.empty();
-            }
-            for(auto it: mpp){
-                
-                if(it.second == ){
-
+                else {
+                    window.clear();
+                    count = 0;
+                    left = right + wlen;
                 }
             }
         }
+
+        return ans;
     }
 };
 ```
