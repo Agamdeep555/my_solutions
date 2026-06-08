@@ -1,7 +1,7 @@
 # sliding window maximum/description
 
 **Platform:** LeetCode  
-**Date:** 2026-06-02  
+**Date:** 2026-06-08  
 
 ## Solution
 
