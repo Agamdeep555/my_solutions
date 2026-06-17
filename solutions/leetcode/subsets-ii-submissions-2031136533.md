@@ -1,34 +1,30 @@
 # subsets ii/submissions/2031136533
 
 **Platform:** LeetCode  
-**Date:** 2026-06-12  
+**Date:** 2026-06-17  
 
 ## Solution
 
 ```
 class Solution {
-    private:
-    void func(int idx ,int n, vector<int>& nums,vector<int> &ds, vector<vector<int>> &ans ){
-        if(idx==n){
-            ans.push_back(ds);
+public:
+    void func(int idx, vector<int>& nums, set<vector<vector<int>>> &ans , vector<int> arr){
+        if(idx==nums.size()){
+            ans.push_back(arr);
             return;
         }
-        ds.push_back(nums[idx]);
-        func(idx+1,n,nums,ds,ans);
-        ds.pop_back();
 
-        while(idx+1<n && nums[idx]==nums[idx+1]){
-            idx++;
-        }
+        arr.push_back(nums[idx]);
+        func(idx+1,nums,ans,arr);
 
-        func(idx+1,n,nums,ds,ans);
+        arr.pop_back();
+        func(idx+1,nums,ans,arr);
     }
-public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> ds;
-        sort(nums.begin(), nums.end()); 
-        func(0,nums.size(),nums,ds,ans);
+        set<vector<vector<int>>> ans;
+        vector<int> arr;
+
+        func(0,nums,ans,arr);
         return ans;
     }
 };
