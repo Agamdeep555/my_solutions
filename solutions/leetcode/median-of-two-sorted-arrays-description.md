@@ -1,7 +1,7 @@
 # median of two sorted arrays/description
 
 **Platform:** LeetCode  
-**Date:** 2026-06-17  
+**Date:** 2026-06-18  
 
 ## Solution
 
