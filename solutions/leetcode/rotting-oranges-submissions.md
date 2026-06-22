@@ -1,7 +1,7 @@
 # rotting oranges/submissions
 
 **Platform:** LeetCode  
-**Date:** 2026-06-08  
+**Date:** 2026-06-22  
 
 ## Solution
 
