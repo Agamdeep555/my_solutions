@@ -1,7 +1,7 @@
 # binary tree right side view/submissions/2027222114
 
 **Platform:** LeetCode  
-**Date:** 2026-06-09  
+**Date:** 2026-06-29  
 
 ## Solution
 
@@ -17,21 +17,35 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
 class Solution {
 public:
-    void func(TreeNode* &root, int level, vector<int>& ans){
-        if(root==NULL) return;
-
-        if(ans.size()==level){
-            ans.push_back(root->val);
-        }
-        func(root->right,level+1,ans);
-        func(root->left,level+1,ans);
-    }
     vector<int> rightSideView(TreeNode* root) {
+        if(root==NULL) return {};
+
+        queue<TreeNode*> q;
+        q.push(root);
         vector<int> ans;
-        func(root,0,ans);
+
+        while(!q.empty()){
+            int n = q.size();
+
+            for(int i=0;i<n;i++){
+                TreeNode* node = q.front();
+                q.pop();
+
+
+                if(i == 0){
+                    ans.push_back(node->val);
+                }
+
+                if(node->right){
+                    q.push(node->right);
+                }
+                if(node->left){
+                    q.push(node->left);
+                }
+            }
+        }
         return ans;
     }
 };
