@@ -1,7 +1,7 @@
 # jump game
 
 **Platform:** LeetCode  
-**Date:** 2026-05-28  
+**Date:** 2026-07-18  
 
 ## Solution
 
@@ -9,13 +9,14 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        int lastpos = nums.size()-1;
+        int last = nums.size();
         for(int i=nums.size()-2;i>=0;i--){
-            if(i+nums[i]>=lastpos){
-                lastpos = i;
+            if(i+1+nums[i]>=last){
+                last = i;
             }
         }
-        return lastpos==0;
+        if(last==0) return true;
+        else return false;
     }
 };
 ```
